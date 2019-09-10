@@ -19,3 +19,7 @@ invert2.rename(columns ={'StationID_Trawl#':'stationid',
                          'Gross Weight (grams)': 'grossweight',
                          'Tare Weight (grams)':'tareweight',
                          'Net Weight (grams)':'netweight'}, inplace =True)
+invert1 = invert1[['stationid','speciesname','count','voucher','qualifier','grossweight','tareweight','netweight']]
+invert2 = invert2[['stationid','speciesname','count','voucher','qualifier','grossweight','tareweight','netweight']]
+Merge = pd.merge(invert1,invert2, how ='outer', on = ['stationid','speciesname'], suffixes=('_1', '_2'))
+Merge.to_excel('P:\PartTimers\DuyNguyen\Python Practice\pythonpractice\Merge.xlsx')
