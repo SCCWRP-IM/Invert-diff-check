@@ -22,4 +22,10 @@ invert2.rename(columns ={'StationID_Trawl#':'stationid',
 invert1 = invert1[['stationid','speciesname','count','voucher','qualifier','grossweight','tareweight','netweight']]
 invert2 = invert2[['stationid','speciesname','count','voucher','qualifier','grossweight','tareweight','netweight']]
 Merge = pd.merge(invert1,invert2, how ='outer', on = ['stationid','speciesname'], suffixes=('_1', '_2'))
-Merge.to_excel('P:\PartTimers\DuyNguyen\Python Practice\pythonpractice\Merge.xlsx')
+Merge['check counts']= Merge.apply( lambda x: x.count_1 == x.count_2, axis =1  )
+Merge['check voucher']= Merge.apply( lambda x: x.voucher_1 == x.voucher_2, axis =1  )
+Merge['check qualifier']= Merge.apply( lambda x: x.qualifier_1 == x.qualifier_2, axis =1  )
+Merge['check grossweight']= Merge.apply( lambda x: x.grossweight_1 == x.grossweight_2, axis =1)
+Merge['check tareweight']= Merge.apply( lambda x: x.tareweight_1 == x.tareweight_2, axis =1  )
+Merge['check netweight']= Merge.apply( lambda x: x.netweight_1 == x.netweight_2, axis =1  )
+Merge.to_excel('P:\PartTimers\DuyNguyen\Python Practice\pythonpractice\Invert Check.xlsx')
