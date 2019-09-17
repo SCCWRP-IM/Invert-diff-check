@@ -50,4 +50,13 @@ Set1notSet2 =pd.DataFrame(A)
 Set1notSet2.rename(columns ={0:"Stationid_1",1:"Speciesname_1"}, inplace = True)
 Set2notSet1 =pd.DataFrame(B)
 Set2notSet1.rename(columns ={0:"Stationid_2",1:"Speciesname_2"}, inplace = True)
-Merge['In 1 not In 2'] = Merge.apply(lambda x: x.Stationid_1 = x.stationid)
+
+
+
+#Below is the code to export the .py file to excel file
+writer = pd.ExcelWriter('P:\PartTimers\DuyNguyen\Python Practice\pythonpractice\Invert Check.xlsx', engine = 'xlsxwriter')
+Merge.to_excel(writer, sheet_name = 'Check for values')
+Set1notSet2.to_excel(writer, sheet_name = 'In Set 1 not in Set 2 list')
+Set2notSet1.to_excel(writer, sheet_name = 'In Set 2 not in Set 1 list')
+writer.save()
+writer.close()
